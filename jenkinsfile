@@ -3,7 +3,7 @@ node
 	stage('SCM')
 	{
 		echo 'Pulling source from Git repo'
-		git branch: '${branch}', url:'https://github.com/OneBlueBird/DotNetCoreApps.git'
+		git branch: '${branch}', url:'https://github.com/OneBlueBird/DotNetClassicApps.git'
 	}
 	stage('Build')
 	{
