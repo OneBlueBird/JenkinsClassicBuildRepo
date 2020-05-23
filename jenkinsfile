@@ -8,10 +8,8 @@ node
 	stage('Build')
 	{
 		echo 'Building...'
-        	sh 'dotnet clean'
-                sh 'dotnet restore'
-		sh 'dotnet --version'
-		sh 'dotnet build CloudifyClassicApps.sln'
+        	sh 'msbuild -version'
+		sh 'msbuild -p:Configuration=Release'
 	}
 	stage('Test')
 	{
