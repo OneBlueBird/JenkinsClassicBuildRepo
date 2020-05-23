@@ -1,0 +1,29 @@
+node
+{
+	stage('SCM')
+	{
+		echo 'Pulling source from Git repo'
+		git branch: '${branch}', url:'https://github.com/OneBlueBird/DotNetCoreApps.git'
+	}
+	stage('Build')
+	{
+		echo 'Building...'
+        sh 'msbuild -version'
+		sh 'msbuild -p:Configuration=Release'
+	}
+	stage('Test')
+	{
+		echo 'Testing...'
+	}
+	stage('Docker build/push')
+	{
+	    echo 'Building docker image...'
+            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+              def app = docker.build("virtualbinaries/dotnetcoreapps", ".").push()
+         }
+	}
+        stage('Deploy')
+        {
+            echo 'Deploying...'
+        }
+}
